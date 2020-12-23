@@ -1,5 +1,5 @@
 
-# isntallation steps 
+# installation steps 
 
 0- k create configmap es-p12-cert --from-file=elastic-stack-ca.p12 -n mon 
 
