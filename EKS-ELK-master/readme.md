@@ -1,0 +1,27 @@
+>>> steps
+0- k create configmap es-p12-cert --from-file=elastic-stack-ca.p12 -n mon 
+1- elasticsearch.yaml
+2- kibana.yaml
+3- logstash.yaml
+4- file-beat
+5- exec inside elasticsearch container >>> inside /usr/share/elasticsearch/bin/  runt this command :
+./elasticsearch.setup-password interactive 
+then enter the those passwrds 
+don't forget to edit those configs also in kibana.yaml and logstash.yaml
+ 
+
+Enter password for [elastic]: 
+pbaf-130-dmn
+Enter password for [apm_system]: 
+@pMP@s$word
+Enter password for [kibana]: 
+Kib@n@P@s$w0rd
+Enter password for [logstash_system]: 
+L0GsT@shP@s$
+Enter password for [beats_system]: 
+Be@tsP@s$
+Enter password for [remote_monitoring_user]: 
+MoniT0RP@s$w0rd
+
+
+Clear data in elasticsearch
