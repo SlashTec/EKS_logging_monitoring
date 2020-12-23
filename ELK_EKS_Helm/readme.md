@@ -1,4 +1,5 @@
 # ElasticSearch Kibana and Metricbeat
+# to install: just run >>> ./install 
 
 # Simple Notes
 if u want to use it for any other cloud provider just change  " storageClassName " value in values-es.yaml
