@@ -14,11 +14,13 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templat
 # to install release in specific namespace
 helm repo add elastic https://helm.elastic.co
 #with Helm 3: helm install elasticsearch ./helm-charts/elasticsearch --set imageTag=7.10.1
-helm install --name elasticsearch --namespace mon elastic/elasticsearch  -f ./values-es.yaml 
+helm install --name elasticsearch --namespace elk elastic/elasticsearch  -f ./values-es.yaml 
 
 # install kibana 
-helm install --name kibana --namespace mon --set service.type=NodePort  elastic/kibana -f ./values-kibana.yaml
+helm install --name kibana --namespace elk --set service.type=NodePort  elastic/kibana -f ./values-kibana.yaml
 
 # install metricbeat
-helm install --name metricbeat --namespace mon elastic/metricbeat
+# helm install --name metricbeat --namespace elk elastic/metricbeat
 
+# install filebeat
+helm install --name filebeat --namespace elk elastic/filebeat --set imageTag=8.0.0-SNAPSHOT
