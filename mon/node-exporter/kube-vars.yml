@@ -1,0 +1,10 @@
+
+# If we should deploy this kubernetes or not.  
+# Setting this to false and re-running our deploy playbook will remove the kubernetes deployment 
+# example to remove: ansible-playbook kubernetes/kube.deployment.playbook.yml --extra-vars '{deployment_enabled: false}'
+deployment_enabled: true 
+manifest_app_dir: ./templates/
+deployment_file: node-exporter-deploy.yaml
+app.name: node-exporter
+service_file: node-exporter-svc.yaml
+serviceaccount_file: node-exporter-ServiceAccount.yaml

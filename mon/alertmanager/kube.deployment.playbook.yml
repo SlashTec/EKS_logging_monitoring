@@ -1,0 +1,61 @@
+- hosts:
+    - localhost
+  vars_files:
+    - ./kube-vars.yml 
+  tasks:
+    - name: ensure manifest dir exists
+      file:
+        path: "{{manifest_app_dir}}"
+        state: directory
+
+    - name: create manifest template for kube deploy 
+      template:
+        src: "{{deployment_file}}"
+        dest: "{{manifest_app_dir}}/{{deployment_file}}"
+      register: deploy_template
+
+    # Apply ConfigMap-Rules
+    - block:
+        - name: apply kubernetes Configmap-Rules
+          shell: "kubectl apply -f {{manifest_app_dir}}/{{configmap_rules_file}}"
+      when: "deployment_enabled"
+    # Apply ConfigMap-alertmanager
+    - block:
+        - name: apply kubernetes Configmap-alertmanger
+          shell: "kubectl apply -f {{manifest_app_dir}}/{{configmap_alertmanager_file}}"
+      when: "deployment_enabled"
+    # Apply ConfigMap-slack
+    - block:
+        - name: apply kubernetes Configmap-slack
+          shell: "kubectl apply -f {{manifest_app_dir}}/{{configmap_slack_file}}"
+      when: "deployment_enabled"
+
+    # Apply Deployment
+    - block: 
+        - name: apply kubernetes deployment
+          shell: "kubectl apply -f {{manifest_app_dir}}/{{deployment_file}}"
+      when: "deployment_enabled"
+    # Apply Service
+    - block:
+        - name: apply kubernetes service
+          shell: "kubectl apply -f {{manifest_app_dir}}/{{service_file}}"
+      when: "deployment_enabled"
+
+    # Removals
+    - block:
+        - name: remove kubernetes deployment
+          shell: "kubectl delete -f {{manifest_app_dir}}/{{deployment_file}}"
+          register: remove_kube_deployment
+      when: not deployment_enabled
+    # Removals
+    - block:
+        - name: remove kubernetes service
+          shell: "kubectl delete -f {{manifest_app_dir}}/{{service_file}}"
+          register: remove_kube_deployment
+      when: not deployment_enabled
+          # Removals
+    - block:
+        - name: remove kubernetes configmap
+          shell: "kubectl delete -f {{manifest_app_dir}}/{{configmap_file}}"
+          register: remove_kube_deployment
+      when: not deployment_enabled
