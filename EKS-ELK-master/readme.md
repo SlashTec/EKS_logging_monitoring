@@ -34,4 +34,5 @@ Enter password for [remote_monitoring_user]:
 pbaf-130-dmn
 
 
-Clear data in elasticsearch
+user: elastic
+pass: pbaf-130-dmn
