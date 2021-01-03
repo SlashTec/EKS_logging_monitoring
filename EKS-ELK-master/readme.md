@@ -12,7 +12,7 @@
 4- file-beat
 
 5- exec inside elasticsearch container >>> inside /usr/share/elasticsearch/bin/  runt this command : 
-./elasticsearch-setup-password interactive 
+./elasticsearch-setup-passwords interactive
 then enter the those passwrds, don't forget to edit those configs also in kibana.yaml and logstash.yaml
 
 Enter password for [elastic]: 
