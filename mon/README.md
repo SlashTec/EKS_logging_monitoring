@@ -34,3 +34,33 @@ cd to deployment folder
 
 $$ ansible-playbook kube.deployment.playbook.yml
 ```
+
+
+# to isntall the dashboards 
+
+### to access to grafana
+> default username and passwords
+username: admin
+passwrod: admin
+
+
+https://www.eksworkshop.com/intermediate/240_monitoring/dashboards/
+
+### For creating a dashboard to monitor the cluster:
+
+Click '+' button on left panel and select ‘Import’.
+Enter 3119 dashboard id under Grafana.com Dashboard.
+Click ‘Load’.
+Select ‘Prometheus’ as the endpoint under prometheus data sources drop down.
+Click ‘Import’.
+
+###  For creating a dashboard to monitor all the pods:
+
+Click '+' button on left panel and select ‘Import’.
+Enter 6417 dashboard id under Grafana.com Dashboard.
+Click ‘Load’.
+Enter Kubernetes Pods Monitoring as the Dashboard name.
+Click change to set the Unique identifier (uid).
+Select ‘Prometheus’ as the endpoint under prometheus data sources drop down.s
+Click ‘Import’.
+
