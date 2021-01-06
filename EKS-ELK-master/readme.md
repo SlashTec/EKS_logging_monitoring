@@ -36,3 +36,41 @@ pbaf-130-dmn
 
 user: elastic
 pass: pbaf-130-dmn
+
+
+Enter into nginx container or pod:
+  $ kubectl exec -it  name_of_nginx_container  -n prod
+  install the filebeat  in nginx
+(Notes)  : u can find the steps here in kibana Gui >> kibana > infrastructure > view setup instruction > logging > log-nginx
+
+Or use following steps direct:-
+
+# Steps to install filebeat on nginx :
+
+Download and install Filebeat:
+ $ curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.2-darwin-x86_64.tar.gz
+$ tar xzvf filebeat-7.4.2-darwin-x86_64.tar.gz
+$ cd filebeat-7.4.2-darwin-x86_64/
+ 
+
+    2) Edit the configuration Modify filebeat.yml to set the connection information:
+ 
+
+But i  use the exist filebeat.yml configuration file (on my Drive folder ELK) instead of the existing one (replace it) :
+
+    3 ) Enable and configure the nginx module
+ 
+ $ sudo filebeat modules enable nginx
+
+   4) Start Filebeat ( install all the dashboards )
+         $  sudo filebeat setup
+         $  sudo service filebeat start
+         or
+    $ ./filebeat setup
+    $ ./filebeat -e
+ 
+
+
+# notes
+i'm using the service_name instead of ip addresses
+
