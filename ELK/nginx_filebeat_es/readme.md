@@ -2,7 +2,8 @@
 
 # Steps to install filebeat on nginx :
 
-> 0) prepare the nginx logs :
+0) prepare the nginx logs :
+```
 seperate the website logs from the main logs and then adjust the log format : 
 1- add this log format in nginx.conf inside http {} context 
     log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
@@ -10,7 +11,7 @@ seperate the website logs from the main logs and then adjust the log format :
                       '"$http_user_agent" "$http_x_forwarded_for"';
 2- use this format in the Vhost 
   access_log /var/log/nginx/website_access.log main;
-
+```
 
 
 1 ) Download and install Filebeat:
