@@ -47,7 +47,19 @@ Or use following steps direct:-
 
 # Steps to install filebeat on nginx :
 
-Download and install Filebeat:
+> 0) prepare the nginx logs :
+seperate the website logs from the main logs and then adjust the log format : 
+1- add this log format in nginx.conf inside http {} context 
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+2- use this format in the Vhost 
+  access_log /var/log/nginx/website_access.log main;
+
+
+
+1 ) Download and install Filebeat:
+
  $ curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.2-darwin-x86_64.tar.gz
 $ tar xzvf filebeat-7.4.2-darwin-x86_64.tar.gz
 $ cd filebeat-7.4.2-darwin-x86_64/
@@ -69,6 +81,9 @@ But i  use the exist filebeat.yml configuration file (on my Drive folder ELK) in
     $ ./filebeat setup
     $ ./filebeat -e
  
+
+
+
 
 
 # notes
