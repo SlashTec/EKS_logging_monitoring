@@ -22,7 +22,9 @@ configmap_file: grafana-configMapDataSources.yaml.  # the name of configMap file
 ```
 **How it works**
 ```
-To start all deployments
+1-) prepare the alrtmanager to with thr right webhook channel and channel name
+
+2-) To start all deployments
 
 ./installAll.sh
 
