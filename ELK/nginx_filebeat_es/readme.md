@@ -20,17 +20,13 @@ seperate the website logs from the main logs and then adjust the log format :
 $ tar xzvf filebeat-7.4.2-darwin-x86_64.tar.gz
 $ cd filebeat-7.4.2-darwin-x86_64/
  
-
-    2) Edit the configuration Modify filebeat.yml to set the connection information:
- 
-
+2) Edit the configuration Modify filebeat.yml to set the connection information:
 But i  use the exist filebeat.yml configuration file (on my Drive folder ELK) instead of the existing one (replace it) :
 
-    3 ) Enable and configure the nginx module
- 
+3 ) Enable and configure the nginx module
  $ sudo filebeat modules enable nginx
 
-   4) Start Filebeat ( install all the dashboards )
+4) Start Filebeat ( install all the dashboards )
          $  sudo filebeat setup
          $  sudo service filebeat start
          or
