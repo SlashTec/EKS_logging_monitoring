@@ -19,8 +19,8 @@ data:
     receivers:
     - name: 'slack'
       slack_configs:
-      - api_url: https://hooks.slack.com/services/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
-        channel: '#prod-notifications'
+      - api_url: https://hooks.slack.com/services
+        channel: '#prod-channel'
         send_resolved: true
         text: |-
             {{ range .Alerts }}
