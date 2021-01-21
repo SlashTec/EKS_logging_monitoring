@@ -22,7 +22,6 @@ reclaimPolicy: Retain
 2- use this syntax and put it in filter bar to seach about the alert_name to silent it  : alertname="HostKernelVersionDeviations"
 3- u will se the silent button click on it then add milions of zeros in the time oh hours then follow the teps and create 
 
-
 -----------------------
 add new target into the prometheus configurations
 u can add the ip and port of target to other job name group or ceate new job_name group to it 
