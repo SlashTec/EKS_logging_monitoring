@@ -14,3 +14,40 @@ parameters:
 reclaimPolicy: Retain
 
 ```
+
+-------------------
+
+Silence specific alert 
+```
+    inhibit_rules:
+      - source_match:
+          severity: 'critical'
+        target_match:
+          severity: 'warning'
+        equal: ['alertname', 'dev', 'instance']
+        
+        # here i added new one "HostKernelVersionDeviations" to be silent 
+      - source_match:
+          severity: 'critical'
+        target_match:
+          severity: 'warning'
+        equal: ['HostKernelVersionDeviations']
+
+```
+
+-----------------------
+after any change u should reload prometheus by this command form jenkins or port-forward or anywhere
+curl -X POST http://localhost:6547/-/reload
+
+
+
+
+
+
+
+
+
+
+
+
+
