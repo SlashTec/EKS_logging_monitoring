@@ -17,23 +17,12 @@ reclaimPolicy: Retain
 
 -------------------
 
-Silence specific alert 
-```
-    inhibit_rules:
-      - source_match:
-          severity: 'critical'
-        target_match:
-          severity: 'warning'
-        equal: ['alertname', 'dev', 'instance']
-        
-        # here i added new one "HostKernelVersionDeviations" to be silent 
-      - source_match:
-          severity: 'critical'
-        target_match:
-          severity: 'warning'
-        equal: ['HostKernelVersionDeviations']
+## Silence specific alert 
+1- port-forward the alertmanager svc then access it using the url
+2- use this syntax and put it in filter bar to seach about the alert_name to silent it  : alertname="HostKernelVersionDeviations"
+3- u will se the silent button click on it then add milions of zeros in the time oh hours then follow the teps and create 
 
-```
+
 -----------------------
 add new target into the prometheus configurations
 u can add the ip and port of target to other job name group or ceate new job_name group to it 
@@ -46,7 +35,7 @@ u can add the ip and port of target to other job name group or ceate new job_nam
 ```
 
 -----------------------
-after any change u should reload prometheus by this command form jenkins or port-forward or anywhere
+after any change in prometheus or alertmanager u should reload the configurations by this command form jenkins or port-forward or anywhere
 curl -X POST http://localhost:6547/-/reload
 
 
