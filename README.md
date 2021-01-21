@@ -34,6 +34,16 @@ Silence specific alert
         equal: ['HostKernelVersionDeviations']
 
 ```
+-----------------------
+add new target into the prometheus configurations
+u can add the ip and port of target to other job name group or ceate new job_name group to it 
+```
+    - job_name: jenkins
+      static_configs:
+      - targets:
+        - "10.80.1.164:9100"
+
+```
 
 -----------------------
 after any change u should reload prometheus by this command form jenkins or port-forward or anywhere
