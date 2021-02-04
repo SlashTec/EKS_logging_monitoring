@@ -91,3 +91,5 @@ Click ‘Import’.
 # to Node Exporter Server Metrics >> for machine that has node exporters and great for testing
 https://grafana.com/grafana/dashboards/405
 
+# on servers  follow this linker very helpfull
+https://medium.com/devops-dudes/install-prometheus-on-ubuntu-18-04-a51602c6256b
