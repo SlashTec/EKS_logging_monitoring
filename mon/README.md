@@ -87,3 +87,7 @@ Click change to set the Unique identifier (uid).
 Select ‘Prometheus’ as the endpoint under prometheus data sources drop down.s
 Click ‘Import’.
 
+
+# to Node Exporter Server Metrics >> for machine that has node exporters and great for testing
+https://grafana.com/grafana/dashboards/405
+
