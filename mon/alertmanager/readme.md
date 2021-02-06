@@ -1,6 +1,6 @@
 # General Documentation for Alertmanager with Prometheus
 
-```
+
 # follwng these links
 https://blog.ruanbekker.com/blog/2019/05/17/install-alertmanager-to-alert-based-on-metrics-from-prometheus/
 https://www.youtube.com/watch?v=6Jr6rntMI3A
@@ -150,9 +150,8 @@ inhibit_rules:
 
 ```
 
-# then reload the configs
+\# then reload the configs
 systemctl daemon-reload
 systemctl restart prometheus
 systemctl restart alertmanager
 
-```
