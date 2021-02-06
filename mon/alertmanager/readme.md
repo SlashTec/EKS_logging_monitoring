@@ -1,11 +1,11 @@
 # General Documentation for Alertmanager with Prometheus
 
 
-# follwng these links
+#follwng these links
 https://blog.ruanbekker.com/blog/2019/05/17/install-alertmanager-to-alert-based-on-metrics-from-prometheus/
 https://www.youtube.com/watch?v=6Jr6rntMI3A
 
-# Notes
+#Notes
 - prometheus is pivotal point of the entire stack 
 - inside prometheus configurations the rules path is relative not absolute 
 
@@ -13,12 +13,12 @@ https://www.youtube.com/watch?v=6Jr6rntMI3A
 
 1) inside the prometheus
 
-# amtool and alertmanager tool
--alertmanager the alertmanager tool
+#amtool and alertmanager tool
+- alertmanager the alertmanager tool
 - amtool :  is a cli tool for interacting with the Alertmanager API. It is bundled with all releases of Alertmanager.
 
 
-# to integrate the alertmanager with prometheus we will add the both the rules and the alertmanager ip:port in prometheus 
+#to integrate the alertmanager with prometheus we will add the both the rules and the alertmanager ip:port in prometheus 
 ```
 rule_files:
   - rules/alert.rules.yml
@@ -29,7 +29,7 @@ alerting:
       - 'localhost:9093'
 ```
 
-# adding rules in prometheus
+#adding rules in prometheus
 mkdir /etc/prometheus/rules/
 nano /etc/prometheus/rules/alert.rules.yml
 ```
@@ -107,7 +107,7 @@ route:
 receivers:
 - name: 'slack-notifications'
   slack_configs:
-  - api_url: "https://hooks.slack.com/services/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"
+  - api_url: "https://hooks.slack.com/services/TFRPM3P/B01J44Q4/TIyOJoYEE75MYzbBzj"
     channel: '#encoded-notifications'
     send_resolved: true
 
@@ -150,7 +150,7 @@ inhibit_rules:
 
 ```
 
-\# then reload the configs
+#then reload the configs
 systemctl daemon-reload
 systemctl restart prometheus
 systemctl restart alertmanager
