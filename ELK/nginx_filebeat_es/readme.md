@@ -24,15 +24,16 @@ $ cd filebeat-7.4.2-darwin-x86_64/
 But i  use the exist filebeat.yml configuration file (on my Drive folder ELK) instead of the existing one (replace it) :
 
 3 ) Enable and configure the nginx module
- $ sudo filebeat modules enable nginx
-
+```  $ sudo filebeat modules enable nginx ```
 4) Start Filebeat ( install all the dashboards )
-         $  sudo filebeat setup
-         $  sudo service filebeat start
-         or
+```
+    $  sudo filebeat setup
+    $  sudo service filebeat start
+ or
     $ ./filebeat setup
     $ ./filebeat -e
  
+```
 
 
 
