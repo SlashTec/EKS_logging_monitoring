@@ -37,7 +37,6 @@ after any change in prometheus or alertmanager u should reload the configuration
 curl -X POST http://localhost:6547/-/reload
 
 
-
 # LOGGING
 
 the best is to use ECK Solution 
