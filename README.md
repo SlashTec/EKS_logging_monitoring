@@ -38,7 +38,6 @@ curl -X POST http://localhost:6547/-/reload
 
 
 
-
 # LOGGING
 
 the best is to use ECK Solution 
