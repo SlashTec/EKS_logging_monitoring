@@ -14,7 +14,7 @@ parameters:
 reclaimPolicy: Retain
 
 ```
-
+# MON
 -------------------
 
 ## Silence specific alert 
@@ -32,6 +32,11 @@ u can add the ip and port of target to other job name group or ceate new job_nam
         - "10.80.1.164:9100"
 
 ```
+
+
+# LOGGING
+
+the best is to use ECK Solution 
 
 -----------------------
 after any change in prometheus or alertmanager u should reload the configurations by this command form jenkins or port-forward or anywhere
