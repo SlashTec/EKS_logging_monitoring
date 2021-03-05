@@ -1,0 +1,82 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elasticsearch
+  namespace: elastic-system
+spec:
+  version: 7.11.1  # was 7.1.0
+  nodeSets:
+  - name: master-zone
+    count: 2
+    podTemplate:
+      spec:
+        containers:
+          - name: elasticsearch
+            resources:
+              limits:
+                memory: 2Gi  
+    config:
+#      cluster.routing.allocation.awareness.attributes: zone
+      node.master: true
+      node.data: false
+      node.ingest: false
+
+    volumeClaimTemplates:
+    - metadata:
+        name: master
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi  
+
+  - name: data-zone
+    count: 2
+    podTemplate:
+      spec:
+        containers:
+          - name: elasticsearch
+            resources:
+              limits:
+                memory: 2Gi
+    config:
+      node.master: false
+      node.data: true
+      node.ingest: true
+
+    volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+#        storageClassName: gp2
+
+
+---
+apiVersion: apm.k8s.elastic.co/v1
+kind: ApmServer
+metadata:
+  name: apm-server
+  namespace: elastic-system
+spec:
+  version: 7.11.1     # was 7.1.0
+  count: 1
+  elasticsearchRef:
+    name: "elasticsearch"
+---
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+  namespace: elastic-system
+spec:
+  version: 7.11.1    #  # was 7.1.0
+  count: 1
+  elasticsearchRef:
+    name: "elasticsearch"
+
