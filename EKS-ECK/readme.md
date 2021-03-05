@@ -25,7 +25,9 @@ https://www.elastic.co/guide/en/cloud-on-k8s/master/k8s-beat-quickstart.html
 If Elasticsearch is aware of the physical configuration of your hardware, it can ensure that the primary shard and its replica shards are spread across different physical servers, racks, or zones, to minimise the risk of losing all shard copies at the same time.
  https://www.elastic.co/guide/en/elasticsearch/reference/6.8/allocation-awareness.html#allocation-awareness
 -  Elasticsearch knows how to balance multi-node clusters to provide scale and high availability
-- 
+- to scale pods in ECK nodeset: kes scale --replicas=2 sts elasticsearch-es-master-zone
+
+
 
 
 ```
