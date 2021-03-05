@@ -9,6 +9,7 @@
 
 
 ## kibana
+```
 to get the password : kubectl get secret <cluster-name>-es-elastic-user -o go-template='{{.data.elastic | base64decode}}'
 EX: kubectl -n elastic-system get secret elasticsearch-es-elastic-user -o go-template='{{.data.elastic | base64decode}}'
 
@@ -16,6 +17,7 @@ EX: kubectl -n elastic-system get secret elasticsearch-es-elastic-user -o go-tem
  curl -k -XDELETE  https://dfasdfasdfasdfasdfassdfasdf.us-east-1.elb.amazonaws.com:9200/.kibana_1  --header "content-type: application/JSON" -u elastic -p
 
 
+```
 ## ES
 https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-quickstart.html
 
