@@ -19,10 +19,15 @@ https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-quickstart.html
 https://www.elastic.co/guide/en/cloud-on-k8s/master/k8s-beat-quickstart.html
 
 ## Notes
-##access them using HTTPS + port-number
+```
+- access them using HTTPS + port-number
+- cluster.routing.allocation.awareness.attributes: rack_id|zone  <<< here i'm telling the elastic search operator about my nodes allocation status to do the best for us depends on our case either we are using distibute our node a cross diff zones or racks 
+If Elasticsearch is aware of the physical configuration of your hardware, it can ensure that the primary shard and its replica shards are spread across different physical servers, racks, or zones, to minimise the risk of losing all shard copies at the same time.
+
+ https://www.elastic.co/guide/en/elasticsearch/reference/6.8/allocation-awareness.html#allocation-awareness
 
 
-
+```
 
 ## installation steps
 ```
