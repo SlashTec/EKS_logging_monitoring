@@ -7,7 +7,7 @@ spec:
   version: 7.11.1  # was 7.1.0
   nodeSets:
   - name: master-zone
-    count: 2
+    count: 3 # very very important to make the master node compound of 3 nodes to make the election and the node recovery working smothly 
     podTemplate:
       spec:
         containers:
@@ -16,7 +16,7 @@ spec:
               limits:
                 memory: 2Gi  
     config:
-#      cluster.routing.allocation.awareness.attributes: zone
+      cluster.routing.allocation.awareness.attributes: zone
       node.master: true
       node.data: false
       node.ingest: false
@@ -29,7 +29,7 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 10Gi  
+            storage: 2Gi  
 
   - name: data-zone
     count: 2
@@ -41,6 +41,7 @@ spec:
               limits:
                 memory: 2Gi
     config:
+      cluster.routing.allocation.awareness.attributes: zone
       node.master: false
       node.data: true
       node.ingest: true
@@ -75,7 +76,7 @@ metadata:
   name: kibana
   namespace: elastic-system
 spec:
-  version: 7.11.1    #  # was 7.1.0
+  version: 7.11.1     # was 7.1.0
   count: 1
   elasticsearchRef:
     name: "elasticsearch"
