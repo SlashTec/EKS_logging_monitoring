@@ -25,6 +25,9 @@ https://www.elastic.co/guide/en/cloud-on-k8s/master/k8s-beat-quickstart.html
 
 
 ## installation steps
+```
 1-)kubectl apply -f https://download.elastic.co/downloads/eck/1.4.0/all-in-one.yaml  # the operator
 2-)apply -f apm_es_kibana.yaml  # this is the config file which gives u a capability to talk to the operator 
 then beat if needed 
+
+```
