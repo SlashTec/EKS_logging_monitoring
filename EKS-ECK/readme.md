@@ -31,7 +31,7 @@ If Elasticsearch is aware of the physical configuration of your hardware, it can
 -  Elasticsearch knows how to balance multi-node clusters to provide scale and high availability
 - to scale pods in ECK nodeset: kes scale --replicas=2 sts elasticsearch-es-master-zone
 - to install plugins specially s3 plugin follow this link : https://coralogix.com/log-analytics-blog/running-elk-on-kubernetes-with-eck-part-2/
-
+- kibana migration/upgration/deletion  also not working smothly and take care of index and it's dashboard may remove 
 
 
 ```
