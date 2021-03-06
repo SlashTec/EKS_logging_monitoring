@@ -39,7 +39,7 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 10Gi  
+            storage: 2Gi  
 
   - name: data-zone
     count: 3
