@@ -46,7 +46,7 @@ If Elasticsearch is aware of the physical configuration of your hardware, it can
 
 ## common commands
 ```
-# to get the nodes and know which is the master : # to get the shards : _cat/shards
+# to get the nodes and know which is the master : # to get the shards : _cat/nodes
 # to get the shards : _cat/shards
 
 ```
