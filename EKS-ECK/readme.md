@@ -38,6 +38,8 @@ If Elasticsearch is aware of the physical configuration of your hardware, it can
 - those 2 option very very important wich makes theoperator aware of the avalibility zones to allocate the shards and it's replicas in a diff zones if not added  may causing the elastic search stoping and became red and kibana will not able to connect and tells u delete .kibana_1 and so on 
       node.attr.zone: us-east-1b
       cluster.routing.allocation.awareness.attributes: zone
+- To ensure the cluster remains available, you must not stop half or more of the nodes in the voting configuration at the same time. As long as more than half of the voting nodes are available, the cluster can work normally. For example, if there are three or four master-eligible nodes, the cluster can tolerate one unavailable node. If there are two or fewer master-eligible nodes, they must all remain available.
+   " that is why we need at least 3 nodes/pods in the master"
 
 ```
 
