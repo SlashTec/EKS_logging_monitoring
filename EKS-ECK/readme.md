@@ -48,7 +48,7 @@ If Elasticsearch is aware of the physical configuration of your hardware, it can
 ```
 # to get the nodes and know which is the master : # to get the shards : _cat/nodes
 # to get the shards : _cat/shards
-
+# to scale po in eck: kes scale --replicas=2 sts elasticsearch-es-master-zone
 ```
 
 ## installation steps
