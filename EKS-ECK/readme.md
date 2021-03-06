@@ -35,6 +35,10 @@ If Elasticsearch is aware of the physical configuration of your hardware, it can
 - to install plugins specially s3 plugin follow this link : https://coralogix.com/log-analytics-blog/running-elk-on-kubernetes-with-eck-part-2/
 - kibana migration/upgration/deletion  also not working smothly and take care of index and it's dashboard may remove 
 - if the cluster turned to red it means  that at least one primary shard and its replicas are not allocated to a node,  and u can follow this link to know how to investigate the issue : https://www.datadoghq.com/blog/elasticsearch-unassigned-shards/
+- those 2 option very very important wich makes theoperator aware of the avalibility zones to allocate the shards and it's replicas in a diff zones if not added  may causing the elastic search stoping and became red and kibana will not able to connect and tells u delete .kibana_1 and so on 
+      node.attr.zone: us-east-1b
+      cluster.routing.allocation.awareness.attributes: zone
+
 
 ```
 
