@@ -41,6 +41,7 @@ If Elasticsearch is aware of the physical configuration of your hardware, it can
 - To ensure the cluster remains available, you must not stop half or more of the nodes in the voting configuration at the same time. As long as more than half of the voting nodes are available, the cluster can work normally. For example, if there are three or four master-eligible nodes, the cluster can tolerate one unavailable node. If there are two or fewer master-eligible nodes, they must all remain available.
    " that is why we need at least 3 nodes/pods in the master"     see >>> https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-node.html#master-node
 
+- all the data stored in the data-nodes not the master, so there is no need to create a hight volume to the master and replica-shard in a diff node from the master-node 
 ```
 
 
