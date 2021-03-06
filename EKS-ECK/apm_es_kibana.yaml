@@ -7,7 +7,7 @@ spec:
   version: 7.11.1  # was 7.1.0
   nodeSets:
   - name: master-zone
-    count: 3
+    count: 3  # must must be at least there to have a capability to recover in case of one down
     podTemplate:
       spec:
         containers:
@@ -42,14 +42,14 @@ spec:
             storage: 2Gi  
 
   - name: data-zone
-    count: 3
+    count: 2  # just need identical 2 data node one works as a primary-shard and the second works as a replica-for-this-primary-shard
     podTemplate:
       spec:
         containers:
           - name: elasticsearch
-            resources:
-              limits:
-                memory: 2Gi
+#            resources:
+#              limits:
+#                memory: 2Gi
 #        initContainers:
 #          - name: install-plugins
 #            command:
