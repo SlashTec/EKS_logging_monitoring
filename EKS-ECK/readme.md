@@ -39,6 +39,13 @@ If Elasticsearch is aware of the physical configuration of your hardware, it can
       node.attr.zone: us-east-1b
       cluster.routing.allocation.awareness.attributes: zone
 
+```
+
+
+## common commands
+```
+# to get the nodes and know which is the master : # to get the shards : _cat/shards
+# to get the shards : _cat/shards
 
 ```
 
