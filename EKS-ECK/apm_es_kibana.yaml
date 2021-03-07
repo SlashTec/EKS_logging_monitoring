@@ -7,14 +7,14 @@ spec:
   version: 7.11.1  # was 7.1.0
   nodeSets:
   - name: master-zone
-    count: 3  # must must be at least there to have a capability to recover in case of one down
+    count: 3
     podTemplate:
       spec:
         containers:
           - name: elasticsearch
-            resources:
-              limits:
-                memory: 2Gi  
+#            resources:
+#              limits:
+#                memory: 2Gi  
 
 #        initContainers:
 #          - name: install-plugins
@@ -42,7 +42,7 @@ spec:
             storage: 2Gi  
 
   - name: data-zone
-    count: 2  # just need identical 2 data node one works as a primary-shard and the second works as a replica-for-this-primary-shard
+    count: 2
     podTemplate:
       spec:
         containers:
@@ -77,7 +77,18 @@ spec:
 #        storageClassName: gp2
 
 
----
+  http:
+    service:
+      spec:
+        type: NodePort
+
+    tls:
+      selfSignedCertificate:
+        disabled: true
+
+
+
+#---
 #apiVersion: apm.k8s.elastic.co/v1
 #kind: ApmServer
 #metadata:
@@ -107,3 +118,20 @@ spec:
 #              limits:
 #                memory: 2Gi
 
+  http:
+    service:
+      spec:
+        type: NodePort
+#      	ports:
+#	- name: http
+#	  port: 80
+#	  protocol: TCP
+#	  targetPort: 5601
+#	- name: https
+#	  port: 433
+#	  protocol: TCP
+#	  targetPort: 5601
+        
+    tls:
+      selfSignedCertificate:
+        disabled: true
