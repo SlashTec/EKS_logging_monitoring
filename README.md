@@ -19,8 +19,9 @@ reclaimPolicy: Retain
 
 ## Silence specific alert 
 ```
-1- port-forward the alertmanager svc then access it using the url
-2- use this syntax and put it in filter bar to seach about the alert_name to silent it  : alertname="HostKernelVersionDeviations"
+1- port-forward the alertmanager svc then access it using the url 
+2-1- got the alertname for the alertname option in the message that is come into your slack or mail :D
+2- use this syntax and put it in filter bar to seach about the alert_name to silent it  : alertname="HostKernelVersionDeviations" 
 3- u will se the silent button click on it then add milions of zeros in the time oh hours then follow the teps and create 
 
 ```
