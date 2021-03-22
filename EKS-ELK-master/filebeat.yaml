@@ -91,30 +91,39 @@ data:
               - equals:
                  kubernetes.namespace: "xtracash"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: filebeat
-  namespace: mon
+  annotations:
+    deprecated.daemonset.template.generation: "1"
+  creationTimestamp: "2020-09-28T08:37:25Z"
+  generation: 1
   labels:
     k8s-app: filebeat
     kubernetes.io/cluster-service: "true"
+  name: filebeat
+  namespace: mon
+  resourceVersion: "58995487"
+  selfLink: /apis/apps/v1/namespaces/mon/daemonsets/filebeat
+  uid: 4329d222-2ed8-4236-8d18-af33b5093ccd
 spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: filebeat
+      kubernetes.io/cluster-service: "true"
   template:
     metadata:
+      creationTimestamp: null
       labels:
         k8s-app: filebeat
         kubernetes.io/cluster-service: "true"
     spec:
-      serviceAccountName: filebeat
-      terminationGracePeriodSeconds: 30
       containers:
-      - name: filebeat
-        image: docker.elastic.co/beats/filebeat:6.3.2
-        args: [
-          "-c", "/etc/filebeat.yml",
-          "-e",
-        ]
+      - args:
+        - -c
+        - /etc/filebeat.yml
+        - -e
         env:
         - name: ELASTICSEARCH_HOST
           value: elasticsearch-logging
@@ -125,44 +134,57 @@ spec:
         - name: ELASTICSEARCH_PASSWORD
           value: changeme
         - name: ELASTIC_CLOUD_ID
-          value:
         - name: ELASTIC_CLOUD_AUTH
-          value:
-        securityContext:
-          runAsUser: 0
+        image: docker.elastic.co/beats/filebeat:6.3.2
+        imagePullPolicy: IfNotPresent
+        name: filebeat
         resources:
           limits:
             memory: 300Mi
           requests:
             cpu: 100m
             memory: 100Mi
+        securityContext:
+          runAsUser: 0
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
         volumeMounts:
-        - name: config
-          mountPath: /etc/filebeat.yml
+        - mountPath: /etc/filebeat.yml
+          name: config
           readOnly: true
           subPath: filebeat.yml
-        - name: prospectors
-          mountPath: /usr/share/filebeat/prospectors.d
+        - mountPath: /usr/share/filebeat/prospectors.d
+          name: prospectors
           readOnly: true
-        - name: data
-          mountPath: /usr/share/filebeat/data
-        - name: varlibdockercontainers
-          mountPath: /var/lib/docker/containers
+        - mountPath: /usr/share/filebeat/data
+          name: data
+        - mountPath: /var/lib/docker/containers
+          name: varlibdockercontainers
           readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: filebeat
+      serviceAccountName: filebeat
+      terminationGracePeriodSeconds: 30
       volumes:
-      - name: config
-        configMap:
-          defaultMode: 0600
+      - configMap:
+          defaultMode: 384
           name: filebeat-config
-      - name: varlibdockercontainers
-        hostPath:
+        name: config
+      - hostPath:
           path: /var/lib/docker/containers
-      - name: prospectors
-        configMap:
-          defaultMode: 0600
+          type: ""
+        name: varlibdockercontainers
+      - configMap:
+          defaultMode: 384
           name: filebeat-prospectors
-      - name: data
-        emptyDir: {}
+        name: prospectors
+      - emptyDir: {}
+        name: data
+  updateStrategy:
+    type: OnDelete
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
@@ -200,4 +222,3 @@ metadata:
   namespace: mon
   labels:
     k8s-app: filebeat
-
