@@ -39,6 +39,11 @@ u can add the ip and port of target to other job name group or ceate new job_nam
 after any change in prometheus or alertmanager u should reload the configurations by this command form jenkins or port-forward or anywhere
 curl -X POST http://localhost:6547/-/reload
 
+----------------------------------
+to test the alertmanager and send notification to the channel
+```
+curl -H "Content-Type: application/json" -d '[{"labels":{"alertname":"Ghanem"}}]' a07899fe6f6b040b68ab991bfb14f7ad-347767263.ap-southeast-1.elb.amazonaws.com:9093/api/v1/alerts
+```
 
 # LOGGING
 
