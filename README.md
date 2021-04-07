@@ -43,10 +43,10 @@ curl -X POST http://localhost:6547/-/reload
 to test the alertmanager and send notification to the channel
 ```
 # in case u want to send the alert to the alrtmanager and then the alertmanager ends it to the slack
-curl -H "Content-Type: application/json" -d '[{"labels":{"alertname":"Ghanem"}}]' a07899fe6f6b040b68ab991bfb14f7ad-347767263.ap-southeast-1.elb.amazonaws.com:9093/api/v1/alerts
+curl -H "Content-Type: application/json" -d '[{"labels":{"alertname":"Ghanem"}}]' a0bfb14f7ad-347767263.ap-southeast-1.elb.amazonaws.com:9093/api/v1/alerts
 
 # in case u want to send the alert to the slack directly
-curl -X POST -H 'Content-type: application/json' --data '{"text":"backup done for test"}' https://hooks.slack.com/services/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
+curl -X POST -H 'Content-type: application/json' --data '{"text":"backup done for test"}' https://hooks.slack.com/services/TF4P/B0Q98T/XgBS9OWgyR50
 ```
 
 # LOGGING
