@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: k8s-pgmon-grafana
+  namespace: mon
+  labels:
+    app: grafana
+spec:
+  serviceName: grafana
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - image: marksugar/grafana:5.4.3-p
+        name: grafana
+        ports:
+        - containerPort: 3000
+          name: http
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: http
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - mountPath: /var/lib/grafana
+          name: grafana-storage
+        - mountPath: /etc/grafana/provisioning/datasources
+          name: grafana-datasources
+          readOnly: true
+        env:
+        - name: GF_AUTH_BASIC_ENABLED
+          value: "true"
+        - name: GF_AUTH_ANONYMOUS_ENABLED
+          value: "false"
+        - name: GF_PATHS_PLUGINS
+          value: "/tmp/plugins/"
+ #       - name: GF_INSTALL_PLUGINS
+ #         value: grafana-piechart-panel
+      securityContext:
+        runAsUser: 0
+#      dnsPolicy: "None"
+#      dnsConfig:
+ #       nameservers:
+  #        - 8.8.8.8
+   #       - 10.10.100.100
+      volumes:
+      - name: grafana-datasources
+        configMap:
+          name: grafana-datasources
+  volumeClaimTemplates:
+  - metadata:
+      annotations:
+        volume.beta.kubernetes.io/storage-class: topology-aware-standard
+      creationTimestamp: null
+      name: grafana-storage
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      dataSource: null
+      resources:
+        requests:
+          storage: 20Gi

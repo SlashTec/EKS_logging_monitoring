@@ -1,0 +1,44 @@
+- hosts:
+    - localhost
+  vars_files:
+    - ./kube-vars.yml 
+  tasks:
+    - name: ensure manifest dir exists
+      file:
+        path: "{{manifest_app_dir}}"
+        state: directory
+
+    - name: create manifest template for kube deploy 
+      template:
+        src: "{{namespace_file}}"
+        dest: "{{manifest_app_dir}}/{{namespace_file}}"
+      register: deploy_template
+
+    # Apply NameSpace
+    - block:
+        - name: apply kubernetes namespace
+          shell: "kubectl apply -f {{manifest_app_dir}}/{{namespace_file}}"
+      when: "deployment_enabled"
+    # Apply Deployment
+    - block: 
+        - name: apply kubernetes ETCD
+          shell: "kubectl apply -f {{manifest_app_dir}}/{{etcd_deployment_file}}"
+      when: "deployment_enabled"
+    # Apply Service
+    - block:
+        - name: apply kubernetes ETCD_tls
+          shell: "kubectl apply -f {{manifest_app_dir}}/{{etcd_tls_deployment_file}}"
+      when: "deployment_enabled"
+
+   # Removals
+    - block:
+        - name: remove kubernetes etcd
+          shell: "kubectl delete -f {{manifest_app_dir}}/{{etcd_deployment_file}}"
+          register: remove_kube_deployment
+      when: not deployment_enabled
+    # Removals
+    - block:
+        - name: remove kubernetes etcd_tls
+          shell: "kubectl delete -f {{manifest_app_dir}}/{{etcd_tls_deployment_file}}"
+          register: remove_kube_deployment
+      when: not deployment_enabled

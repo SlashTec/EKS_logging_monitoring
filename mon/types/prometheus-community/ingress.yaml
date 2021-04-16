@@ -1,0 +1,27 @@
+kind: Ingress
+metadata:
+  annotations:
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":
+      { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:686777881901:certificate/58571b58-1f34-4853-8986-442b56cef766
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    kubernetes.io/ingress.class: alb
+  name: mon
+  namespace: mon
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: ssl-redirect
+          servicePort: use-annotation
+        path: /*
+  - host: mon.urent.com
+    http:
+      paths:
+      - backend:
+          serviceName: slashtec-mon-grafana
+          servicePort: 80
+        path: /*
