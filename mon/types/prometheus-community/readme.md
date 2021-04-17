@@ -24,7 +24,7 @@ k apply -f ingress
 - to upgrade : helm upgrade slashtec-mon --namespace mon prometheus-community/prometheus-operator
 - if u faced this error : 
 kubectl get validatingwebhookconfigurations.admissionregistration.k8s.io      //delete all objects
- kubectl delete validatingwebhookconfigurations.admissionregistration.k8s.io slashtec-mon-prometheus-op-admission vpc-resource-validating-webhook
+kubectl delete validatingwebhookconfigurations.admissionregistration.k8s.io slashtec-mon-prometheus-op-admission vpc-resource-validating-webhook
 
 kubectl get MutatingWebhookConfiguration      //delete all objects
 kubectl delete MutatingWebhookConfiguration slashtec-mon-prometheus-op-admission vpc-resource-mutating-webhook
