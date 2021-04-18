@@ -6,7 +6,7 @@ k -n kube-system get cm  kube-proxy-config -o yaml >kube-proxy-config.yaml
 k -n kube-system edit cm  kube-proxy-config       
 >>> then change metricsBindAddress: from "127.0.0.1:10249" to  "0.0.0.0:10249"
 edit the slack url and the channel name inside the slack url and your ingress ssl
-
+kubectl -n kube-system rollout restart ds kube-proxy
 ```
 ### installation steps
 ```
