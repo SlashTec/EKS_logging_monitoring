@@ -1,0 +1,41 @@
+def git_branch      = "main"
+def namespace       = "dev"
+def gitUrl          = "git@github.com:Quizplus/devops.git"
+def serviceName     = "nginx"
+def imageTag        = "${serviceName}:${namespace}_${BUILD_NUMBER}"
+def awsRegion       = "us-east-1"
+def ecrUrl          = "604159183131.dkr.ecr.us-east-1.amazonaws.com"
+//def ecr             = " 686777881901.dkr.ecr.ap-southeast-1.amazonaws.com"
+//def awsProfile      = "default"
+def k8sContext      = "arn:aws:eks:us-east-1:604159183131:cluster/dev-es"
+def awsCredsId      = "aws-credentials"
+def gitCred         = "dev-quizplus-test"
+
+node {
+
+    stage ("Checkout"){
+      checkout([$class: 'GitSCM', branches: [[name: "*/main"]], extensions: [], userRemoteConfigs: [[credentialsId: "${gitCred}" , url: "${gitUrl}"]]])    
+      sh "cp -r  dev/deployment/nginx/*  ."
+    }
+  
+    stage ('Docker build'){
+  
+      sh "docker build -t ${serviceName}:${namespace}-${BUILD_NUMBER} ."
+    }
+ 
+   stage('Push Docker Image With Commit ID To ECR'){
+    docker.withRegistry("https://${ecrUrl}/${serviceName}", "ecr:${awsRegion}:${awsCredsId}") {
+    docker.image("${serviceName}:${namespace}-${BUILD_NUMBER}").push("${namespace}-${BUILD_NUMBER}")
+  }
+}
+ 
+    stage ('deploy nginx'){
+     sh "kubectl -n ${namespace} apply -f kube/  "
+     sh "kubectl -n ${namespace} set image deployment/${serviceName}  ${serviceName}=${ecrUrl}/${serviceName}:${namespace}-${BUILD_NUMBER}"
+    }
+
+  stage ('cleanup'){
+  cleanWs()
+ }
+
+}

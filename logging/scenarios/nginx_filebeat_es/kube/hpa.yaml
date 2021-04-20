@@ -1,0 +1,12 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-hpa   # hpa resource-name
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx # the deployment name that i want to scale it automatically
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
