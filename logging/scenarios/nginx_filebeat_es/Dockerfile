@@ -15,4 +15,6 @@ RUN filebeat modules enable nginx
 COPY entrypoint.sh /docker-entrypoint.d/
 RUN chmod +x  /docker-entrypoint.d/entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.d/entrypoint.sh"]
-CMD ["nginx", "-g", "daemon off;"]
+#CMD ["nginx", "-g", "daemon off;"]  # why i hashed this ?! good, u should know that every container has it's own default entrypoint and 
+# the default entrypoint in this container is running nginx and now i'm editing the default entrypoint and the CMD working as an additional argument to the entrypoint
+# so in summary, CMD adding an additional argument to the entrypoint, and if u running diffrent and veryting of things in the entrypoint.sh u shouldn't use CMD in this case  
