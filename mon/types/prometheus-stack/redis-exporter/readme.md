@@ -13,7 +13,7 @@ run the_connection_to_master_redis command in background instead of using system
 - job_name: redis_exporter
   metrics_path: /metrics
   static_configs:
-    - targets: ['10.80.4.231:9121']
+    - targets: ['redis-exporter.prod.svc.cluster.local:9121']
 
 3-) Create Secret from the above file
 kubectl create secret generic additional-configs --from-file=prometheus-additional.yaml -n mon 
