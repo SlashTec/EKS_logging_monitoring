@@ -6,7 +6,9 @@
 k -n kube-system get cm  kube-proxy-config -o yaml >kube-proxy-config.yaml
 k -n kube-system edit cm  kube-proxy-config       
 >>> then change metricsBindAddress: from "127.0.0.1:10249" to  "0.0.0.0:10249"
-k -n kube-system rollout restart deamonset kube-proxy-config   
+k -n kube-system rollout restart deamonset kube-proxy-config   to get the new changes
+
+# then delete all of them
 kubectl delete crd alertmanagerconfigs.monitoring.coreos.com
 kubectl delete crd alertmanagers.monitoring.coreos.com
 kubectl delete crd podmonitors.monitoring.coreos.com
