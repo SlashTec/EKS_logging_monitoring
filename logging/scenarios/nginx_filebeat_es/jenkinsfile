@@ -34,8 +34,8 @@ node {
      sh "kubectl -n ${namespace} set image deployment/${serviceName}  ${serviceName}=${ecrUrl}/${serviceName}:${namespace}-${BUILD_NUMBER}"
     }
 
-  stage ('cleanup'){
-  cleanWs()
- }
+//  stage ('cleanup'){
+//  cleanWs()
+// }
 
 }
