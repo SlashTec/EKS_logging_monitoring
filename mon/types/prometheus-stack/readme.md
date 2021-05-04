@@ -6,8 +6,7 @@
 k -n kube-system get cm  kube-proxy-config -o yaml >kube-proxy-config.yaml
 k -n kube-system edit cm  kube-proxy-config       
 >>> then change metricsBindAddress: from "127.0.0.1:10249" to  "0.0.0.0:10249"
-edit the slack url and the channel name inside the slack url and your ingress ssl
-
+k -n kube-system rollout restart deamonset kube-proxy-config   
 kubectl delete crd alertmanagerconfigs.monitoring.coreos.com
 kubectl delete crd alertmanagers.monitoring.coreos.com
 kubectl delete crd podmonitors.monitoring.coreos.com
@@ -16,6 +15,8 @@ kubectl delete crd prometheuses.monitoring.coreos.com
 kubectl delete crd prometheusrules.monitoring.coreos.com
 kubectl delete crd servicemonitors.monitoring.coreos.com
 kubectl delete crd thanosrulers.monitoring.coreos.com
+
+edit the slack url and the channel name inside the slack url and your ingress ssl
 
 ```
 
