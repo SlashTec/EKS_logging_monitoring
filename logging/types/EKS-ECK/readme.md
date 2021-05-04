@@ -57,8 +57,8 @@ If Elasticsearch is aware of the physical configuration of your hardware, it can
 
 ## installation steps
 ```
-1-)kubectl -n kube-system apply -f https://download.elastic.co/downloads/eck/1.4.0/all-in-one.yaml  # the operator
-2-)apply -f apm_es_kibana.yaml  # this is the config file which gives u a capability to talk to the operator 
+1-) kubectl -n elastic-system apply -f https://download.elastic.co/downloads/eck/1.4.0/all-in-one.yaml  # the operator
+2-) apply -n elastic-system -f apm_es_kibana.yaml  # this is the config file which gives u a capability to talk to the operator 
 then beat if needed 
 
 ```
