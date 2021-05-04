@@ -4,6 +4,9 @@
 ```
 -gp2 storage class and be the default if not in the annotations:      storageclass.kubernetes.io/is-default-class: "true"
 -make storage class has a capability to expand :  allowVolumeExpansion: true 
+- set scale-in protection option, there are 2 ways : 
+  -a) either by do it manually for the current or specific ec2 instances  >>> from "instances management" tab  >>> use this one better 
+  -b) or for the autoscalling group generaly >>> from the the "advanced configration" section in "details" tab >> here will scale out only not in 
 
 ```
 
